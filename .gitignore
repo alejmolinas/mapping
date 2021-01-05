@@ -1,0 +1,42 @@
+# Pycharm config
+.idea
+.vscode
+
+# Compiled python modules.
+*.pyc
+*.pyo
+# Setuptools distribution folder.
+/dist/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+
+__pycache__/
+.DS_Store*
+.VolumeIcon.icns
+.fseventsd
+Icon?
+.gdb_history
+ehthumbs.db
+Thumbs.db
+.directory
+
+# Python files
+*.py[ocd]
+# setup.py working directory
+build
+# sphinx build directory
+_build
+# setup.py dist directory
+dist
+doc/build
+doc/cdoc/build
+# Egg metadata
+*.egg-info
+# The shelf plugin uses this dir
+./.shelf
+MANIFEST
+.cache
+
+# Virtual Envivorment
+venv/
