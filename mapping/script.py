@@ -1,6 +1,11 @@
 from __future__ import print_function
 from io import open
-from . import *
+from .parser import parser
+from .unicodeutils import convert_input
+from .pathutils import check_env, create_env
+from .glyphgen import generate_glyphs
+from .svgappend import append_numbers
+from .map import manual_map, final_check
 
 
 def main():

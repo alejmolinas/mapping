@@ -53,4 +53,4 @@ def convert_input(inp):
     if len(raw) == 0:
         raise ValueError("No characters found!")
 
-    return raw, map(to_ffuni, raw)
+    return raw, list(map(to_ffuni, raw))

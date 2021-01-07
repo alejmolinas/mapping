@@ -13,7 +13,7 @@ setup(
     description='TODO',
     author='Alejandro Molinas',
     license='',
-    python_requires='==2.7.*',
+    python_requires='>=2.7',
     install_requires=['lxml'],
     entry_points = {
         'console_scripts': [

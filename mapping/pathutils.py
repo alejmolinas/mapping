@@ -1,6 +1,9 @@
 import os, sys
 import errno
-import urllib2
+try:
+    import urllib2 as urllib
+except ModuleNotFoundError:
+    import urllib
 import pkg_resources
 
 
@@ -77,7 +80,7 @@ def create_env():
 
         print("Downloading \'{}\', this might take a while".format(FONT_NAME))
 
-        font = urllib2.urlopen(FONT_URL)
+        font = urllib.urlopen(FONT_URL)
         font_stream = chunk_read(font, report_hook=chunk_report)
         
         with open(FONT_NAME, "wb") as f:

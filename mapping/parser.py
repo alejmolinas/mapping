@@ -5,13 +5,19 @@ __all__ = ["parser"]
 
 
 def parser():
+    try:
+        dummy = unicode(s, 'utf8') # Dummy needed to catch the exception
+        ptype = lambda s: unicode(s, 'utf8')
+        del dummy
+    except NameError:
+        ptype = str
     
     description = "Map chinese characters to their stroke order"
     parser = argparse.ArgumentParser(description=description,
                                     formatter_class=lambda prog: argparse.HelpFormatter(prog,max_help_position=35))
 
     input_group = parser.add_mutually_exclusive_group()
-    input_group.add_argument('-c', '--chars', type=lambda s: unicode(s, 'utf8'),
+    input_group.add_argument('-c', '--chars', type=ptype,
                         help='string with characters to map', metavar='str')
 
     input_group.add_argument('-f', '--file', type=str, metavar='filename',
