@@ -1,7 +1,7 @@
 # Mapping
 
 
-*A Python 2 command line utility 
+*A Python command line utility 
 for mapping chinese characters to their stroke order using fontforge and inkscape*
 
 
@@ -10,12 +10,12 @@ for mapping chinese characters to their stroke order using fontforge and inkscap
 ```bash
 $ git clone https://github.com/alejmolinas/mapping
 $ cd mapping
-$ pip2 install . --user
+$ pip3 install . --user
 ```
 
 Directly from git repository
 ```bash
-$ pip2 install git+https://github.com/alejmolinas/mapping.git
+$ pip3 install git+https://github.com/alejmolinas/mapping.git
 ```
 
 ## Usage example
@@ -63,11 +63,11 @@ $ pip install -e . --user
 
 ## Misc
 - The fontforge python module can be installed by
-   `$ sudo apt-get install python-fontforge`
+   `$ sudo apt-get install python3-fontforge`
 
 - It is recommended to check the option "Zoom when window is resized" on inkscape `Edit->Preferences->Windows-> Zoom when window is resized`
 
-- This utility was only tested using python 2, inkscape 1.0.1 and ubuntu 18.04
+- This utility was only tested using python 3, inkscape 1.0.1 and Ubuntu 20.04
 - "Mapping" is a temporary name, name suggestions are very appreciated!
 - TODO list is temporary on `mapping/version.py`
 
