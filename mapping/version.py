@@ -1,7 +1,6 @@
-version = "0.1.1"
+version = "0.1.2"
 
 """TODO: 
- - Add support to python 3
  - Generate a file with information on each character mapped and the
    dictionary used to map it
  - Add flag to the cli parser to specify what stroke order system is 

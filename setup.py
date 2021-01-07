@@ -14,7 +14,7 @@ setup(
     author='Alejandro Molinas',
     license='',
     python_requires='>=2.7',
-    install_requires=['lxml'],
+    install_requires=['lxml', 'requests'],
     entry_points = {
         'console_scripts': [
             'fmap = mapping.script:main',

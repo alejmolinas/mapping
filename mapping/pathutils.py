@@ -1,9 +1,7 @@
-import os, sys
+import os
 import errno
-try:
-    import urllib2 as urllib
-except ModuleNotFoundError:
-    import urllib
+import math
+import requests
 import pkg_resources
 
 
@@ -79,16 +77,9 @@ def create_env():
     if not os.path.isfile(FONT_NAME):
 
         print("Downloading \'{}\', this might take a while".format(FONT_NAME))
-
-        font = urllib.urlopen(FONT_URL)
-        font_stream = chunk_read(font, report_hook=chunk_report)
+        download_file(FONT_URL, FONT_NAME)
         
-        with open(FONT_NAME, "wb") as f:
-            f.write(font_stream)
-            
-        del font_stream
-        
-    with open("list.txt", "wb") as f:
+    with open("list.txt", "a+") as f:
         pass
 
     make_dir("glyphs")
@@ -107,34 +98,34 @@ def create_env():
     return 
 
 
-# chunk_report() and chunk_read() from https://stackoverflow.com/a/56619744
-
-def chunk_report(bytes_so_far, chunk_size, total_size):
-    percent = float(bytes_so_far) / total_size
-    percent = round(percent*100, 2)
-    sys.stdout.write("Downloaded %d of %d bytes (%0.2f%%)\r" %
-                     (bytes_so_far, total_size, percent))
-    sys.stdout.flush()
-    if bytes_so_far >= total_size:
-        sys.stdout.write('\n')
+def print_progressbar(total,current,barsize=60):
+    """Modified from https://stackoverflow.com/a/61295200
+    """
+    progress=int(current*barsize/total)
+    completed= str(int(current*100/total)) + '%'
+    print('[' , chr(9608)*progress,' ',completed,'.'*(barsize-progress),'] ',str(current)+'/'+str(total), sep='', end='\r',flush=True)
 
 
-def chunk_read(response, chunk_size=8192, report_hook=None):
-    total_size = response.info().get("Content-Length").strip()
-    total_size = int(total_size)
-    bytes_so_far = 0
-    data = b""
-
-    while 1:
-        chunk = response.read(chunk_size)
-        bytes_so_far += len(chunk)
-
-        if not chunk:
-            break
-
-        if report_hook:
-            report_hook(bytes_so_far, chunk_size, total_size)
-
-        data += chunk
-
-    return data
+def download_file(url, filename, n_chunk=1):
+    """Modified from https://stackoverflow.com/a/37574635
+        Download a file from the internet
+    Parameters
+    ----------
+    url : str
+        Download link
+    filename : str
+        Name of the output file
+    n_chunk : int, optional
+        Numbers of download chunks, by default 1
+    """
+    r = requests.get(url, stream=True)
+    # Estimates the number of bar updates
+    block_size = 1024
+    file_size = int(r.headers.get('Content-Length', None))
+    num_bars = math.ceil(file_size / (n_chunk * block_size))
+    print_progressbar(num_bars,0)
+    with open(filename, 'wb') as f:
+        for i, chunk in enumerate(r.iter_content(chunk_size=n_chunk * block_size)):
+            f.write(chunk)
+            print_progressbar(num_bars, i+1)
+    return
