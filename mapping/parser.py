@@ -6,7 +6,7 @@ __all__ = ["parser"]
 
 def parser():
     try:
-        dummy = unicode(s, 'utf8') # Dummy needed to catch the exception
+        dummy = unicode() # Dummy needed to catch the exception
         ptype = lambda s: unicode(s, 'utf8')
         del dummy
     except NameError:

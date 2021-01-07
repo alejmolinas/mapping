@@ -1,6 +1,7 @@
 # Pycharm config
 .idea
 .vscode
+.ipynb_checkpoints
 
 # Compiled python modules.
 *.pyc
